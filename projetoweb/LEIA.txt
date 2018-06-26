@@ -1,1 +1,7 @@
-Todo o conte˙do contido na pasta 'projetoweb' È de um projeto em php j· existente, que estou postando como adicional. Obrigado
+Todo o conte√∫do contido na pasta 'projetoweb' √© de um projeto em php j√° existente, que estou postando como adicional. 
+
+C√≥digo: 1512
+Usu√°rio: teste
+Senha: 1234
+
+Obrigado
