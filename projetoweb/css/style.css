@@ -1,0 +1,282 @@
+
+/* Float Shadow */
+.hvr-float-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-float-shadow:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
+/* Form */
+.form {
+  position: relative;
+  z-index: 1;
+  background: #031023;
+  max-width: 300px;
+  margin: 0 auto 40px;
+  padding: 30px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  text-align: center;
+}
+.form .thumbnail {
+  background-image: url('../img/reduzida.png');
+  width: 150px;
+  height: 135px;
+  background-repeat:no-repeat;
+  margin: 0 auto 70px;
+  padding: 50px 30px;
+  box-sizing: border-box;
+
+}
+.form .thumbnail img {
+  display: block;
+  width: 100%;
+}
+.form input {
+  transition: 0.5s;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid;
+  margin: 0 0 15px;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  outline: 0;
+  background: #08347a;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.form .mensagem {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .mensagem a {
+  color: #EF3B3A;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 30px auto;
+  text-align: center;
+
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #f2f2f2;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+body {
+    background: #031023;
+    font-family: "Roboto", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+}
+#msgforgot{
+    border-radius: 5px;
+    margin-top: -10px;
+    margin-bottom: 5px;
+    background-color: #EF3B3A;
+}
+#titlemsgforgotp{
+    margin: 0;
+    padding: 15px;
+    font-weight: 500;
+}
+#msgforgotp {
+    color: #000000;
+    font-size: 15px;
+    margin: 0;
+    padding-bottom: 14px;
+}
+form input:focus{
+    border-bottom: 2px solid #3bdd2a;
+    transition: 0.25s;
+}
+#errodiv{
+    width: 350px;
+    height: 70px;
+    position: absolute;
+    background-color: rgb(232,74,95,0.9);
+    z-index:2;
+    top:93%;
+    left:2%;
+    margin-top:-75px;
+    border-radius: 5px;
+    
+}
+#errodiv #perro{
+    color: white;
+    padding: 8px;
+    font-size: 13px;
+    text-align: center;
+    
+   
+}
+#x{
+    position: absolute;
+    padding-left: 9px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #2D2D2D;
+    cursor: pointer;
+}
+#x:hover{
+    color: #141414;
+}
+#partedecimaerro{
+    width: 100%;
+    height: 30px;
+    background-color: #EF3B3A;
+    text-align: center;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+#partedecimaerro p{
+    margin: 0;
+    padding: 6px;
+}
+#mandouemail{
+    width: 400px;
+    height: 300px;
+    top:50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -150px;
+    z-index: 1;
+    border-radius: 5px;
+    position: absolute;
+    background-color: white;
+    display: none;
+    text-align: center;
+}
+#msgokemail{
+    width: 88%;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#btnmostraemail{
+    outline: 0;
+    width: 60%;
+    border: 0;
+    padding: 8px;
+    background-color: #09A9F4;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+#btnmostraemail p{
+    margin: 0;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+}
+
+#okemail{
+    width: 100%;
+    height: 150px;
+    border-radius: 5px 5px 0 0;
+    background-color: #09A9F4;
+}
+
+#imgemail{
+    width: 128px;
+    height: 128px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 20px;
+}
+
+
