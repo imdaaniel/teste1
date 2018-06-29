@@ -2,26 +2,26 @@
 session_start();
 function criaslug($string)
 {
-    // replace non letter or digits by -
+    // substitui o que nao for letra ou digito por -
     $string = preg_replace('~[^\pL\d]+~u', '-', $string);
 
-    // transliterate
+    // converte pra utf8
     $string = iconv('utf-8', 'us-ascii//TRANSLIT', $string);
 
-    // remove unwanted characters
+    // remove caracteres estranhos
     $string = preg_replace('~[^-\w]+~', '', $string);
 
-    // trim
+    // trim (remove espaços em branco no inicio e no fim)
     $string = trim($string, '-');
 
-    // remove duplicated - symbols
+    // remove - duplicados
     $string = preg_replace('~-+~', '-', $string);
 
-    // lowercase
+    // deixa tudo minúsculo
     $string = strtolower($string);
 
     if (empty($string)) {
-      return 'sem slug';
+        return 'sem slug';
     }
 
     return $string;
@@ -34,6 +34,8 @@ $titulo_erro = $slug_erro = $descricao_erro = $palavras_chave_erro = $conteudo_e
 
 if(isset($_POST["id"]) && !empty($_POST["id"]))
 {
+    //POST - PARA DAR UPDATE NO BANCO
+    echo "<script>alert('post');</script>";
     $id = $_POST["id"];
     
     //Valida Título
@@ -70,7 +72,6 @@ if(isset($_POST["id"]) && !empty($_POST["id"]))
     else
     {
         $palavras_chave = $input_palavras_chave;
-        //$palavras_chave = explode(';', $palavras_chave);
     }
     
     //Valida Conteúdo
@@ -119,6 +120,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"]))
 }
 else
 {
+    //GET - PARA EXIBIR AO USUÁRIO
     if(isset($_GET["id"]) && !empty(trim($_GET["id"])))
     {
         $id = trim($_GET["id"]);

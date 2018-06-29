@@ -2,22 +2,22 @@
 session_start();
 function criaslug($string)
 {
-    // replace non letter or digits by -
+    // substitui o que nao for letra ou digito por -
     $string = preg_replace('~[^\pL\d]+~u', '-', $string);
 
-    // transliterate
+    // converte pra utf8
     $string = iconv('utf-8', 'us-ascii//TRANSLIT', $string);
 
-    // remove unwanted characters
+    // remove caracteres estranhos
     $string = preg_replace('~[^-\w]+~', '', $string);
 
-    // trim
+    // trim (remove espaços em branco no inicio e no fim)
     $string = trim($string, '-');
 
-    // remove duplicated - symbols
+    // remove - duplicados
     $string = preg_replace('~-+~', '-', $string);
 
-    // lowercase
+    // deixa tudo minúsculo
     $string = strtolower($string);
 
     if (empty($string)) {
@@ -83,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     }
     
     //Verifica tudo antes de inserir no banco de dados
+    //STMT evita Injeção SQL, reduz o tempo de análise e reduz também a largura de banda para o servidor (transferencia menor)
     if(empty($titulo_erro) && empty($slug_erro) && empty($descricao_erro) && empty($palavras_chave_erro) && empty($conteudo_erro))
     {
         $sql = "INSERT INTO noticias (titulo, slug, descricao, palavras_chave, conteudo) VALUES (?, ?, ?, ?, ?)";
@@ -141,7 +142,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header">
-                            Adicionar notícia
+                            <h2>Adicionar notícia</h2>
                         </div>
                         <p>Preencha os campos e clique em Adicionar para salvar sua notícia.</p>
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
