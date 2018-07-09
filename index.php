@@ -11,10 +11,53 @@
             table tr td:last-child a{
                 margin-right: 15px;
             }
+            #pesquisa{
+                display: block;
+                margin-left: 80%;
+                width: 20%;
+            }
+            #btnpesquisar {
+                margin-left: 67%;
+            }
         </style>
         <script type="text/javascript">
             window.onload = function(){
                 document.getElementsByClassName('data-toggle="tooltip"').tooltip();
+            }
+
+            function PassaGet(){
+                var itemselecionado = document.getElementById("selectpesquisa").value;
+
+                switch (itemselecionado){
+                    case "ID":
+                        itemselecionado = "id";
+                        break;
+
+                    case "Título":
+                        itemselecionado = "titulo";
+                        break;
+
+                    case "Descrição":
+                        itemselecionado = "descricao";
+                        break;
+
+                    case "Palavra-chave":
+                        itemselecionado = "palavras_chave";
+                        break;
+
+                    case "Conteúdo":
+                        itemselecionado = "conteudo";
+                        break;
+
+                    default:
+                        itemselecionado = '';
+                        break;
+                }
+
+                var item = document.getElementById("txtpesquisa");
+                var texto = item.value;
+                window.location = "index.php?opcao=" + itemselecionado + "&texto=" + texto;
+                //return false;
             }
         </script>
     </head>
@@ -25,10 +68,28 @@
                     <div class="col-md-12">
                         <div class="page-header clearfix">
                             <h2 class="pull-left">Últimas Notícias</h2>
+                            <div id="pesquisa">
+                                <div class="form-group">
+                                    <label>Pesquisar por</label>
+                                    <select id="selectpesquisa">
+                                        <option>ID</option>
+                                        <option>Título</option>
+                                        <option>Descrição</option>
+                                        <option>Palavra-chave</option>
+                                        <option>Conteúdo</option>
+                                    </select>
+                                    <br><br>
+                                    <input type="text" class="form-control" id="txtpesquisa" maxlength="128" required>
+                                    <br>
+                                    <input type="button" class="btn btn-primary" onclick="PassaGet();" value="Pesquisar">
+                                    <a href="index.php" class="btn btn-success pull-right" style="color: white; background: black;border-color: black;">Exibir tudo</a>
+                                </div>
+                            </div>
+                            <br>
                             <a href="php/adicionar.php" class="btn btn-success pull-right">Adicionar</a>
                         </div>
                         <?php
-                        //error_reporting(E_ERROR | E_PARSE);
+                        //error_reporting(E_ERROR | E_PARSE); //OCULTAR AVISOS (WARNING) NA TELA (NÃO ERROS)
                         
 						function InsereTabelaBody($idx, $titulox, $slugx, $descricaox, $palavras_chavex)
 						{
@@ -57,6 +118,7 @@
                         }
 
 						ExecutaSQL1('0');
+
                         function ExecutaSQL1($id)
                         {
                             //Primeira execução
@@ -75,7 +137,28 @@
                             echo "</thead>";
                             echo "<tbody>";
 
-                            $query = "SELECT * FROM noticias where id > '$id' order by id";
+                            if(isset($_GET['texto']))
+                            {
+                                $opcao = $_GET['opcao'];
+                                $texto = $_GET['texto'];
+                                if($opcao == "id")
+                                {
+                                    $query = "SELECT * FROM NOTICIAS where id = '$texto'";
+                                }
+                                else if($opcao == "titulo" || $opcao == "descricao" || $opcao == "palavras_chave" || $opcao == "conteudo")
+                                {
+                                    $query = "select * from noticias where ".$opcao." LIKE '%".$texto."%'";
+                                }
+                                else
+                                {
+                                    echo "Ocorreu um erro ao pesquisar. Tente novamente mais tarde.";
+                                }
+                            }
+                            else
+                            {
+                                $query = "SELECT * FROM noticias where id > '$id' order by id";
+                            }
+
                             if($result = mysqli_query($conexao, $query))
                             {
                                 $qtdlinhas = mysqli_num_rows($result);
